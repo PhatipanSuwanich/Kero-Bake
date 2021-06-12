@@ -1,10 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 import 'package:kero_bake/constants.dart';
 import 'package:kero_bake/controllers/menuController.dart';
 import 'package:kero_bake/controllers/orderController.dart';
 import 'package:kero_bake/models/menu.dart';
+import 'package:kero_bake/models/order.dart';
 import 'package:kero_bake/services/mockJson.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -26,6 +28,11 @@ class _HomeState extends State<Home> {
     super.initState();
     menuController.menu.value =
         mockJsonMenu.map((e) => Menu.fromJson(e)).toList();
+
+    var box = Hive.box<Order>('HistoryOrder');
+    if(box.isNotEmpty){
+      orderController.order.value = box.values.toList().cast<Order>();
+    }
   }
 
   @override

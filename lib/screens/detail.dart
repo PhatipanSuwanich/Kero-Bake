@@ -58,7 +58,7 @@ class _DetailState extends State<Detail> {
                         SnackBar(content: Text('ใส่รถเข็นเรียบร้อย!'),duration: Duration(seconds: 1)
                     );
                     setState(() {
-                      orderController.order.add(Order(
+                      orderController.addOrder(Order(
                         title: menuController.currentMenu().title,
                         cover: menuController.currentMenu().cover,
                         size: menuController.currentMenu().size[_currentSize],

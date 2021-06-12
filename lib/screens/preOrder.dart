@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 import 'package:kero_bake/controllers/orderController.dart';
+import 'package:kero_bake/models/order.dart';
 
 class PreOrder extends StatefulWidget {
   @override
@@ -10,6 +12,7 @@ class PreOrder extends StatefulWidget {
 class _PreOrderState extends State<PreOrder> {
   final OrderController orderController = Get.find();
   int _price = 0;
+  var box = Hive.box<Order>('HistoryOrder');
 
   @override
   void initState() {
@@ -122,6 +125,7 @@ class _PreOrderState extends State<PreOrder> {
                 setState(() {
                   _price -= orderController.order[index].price;
                   orderController.order.removeAt(index);
+                  box.deleteAt(index);
                 });
               },
             )

@@ -1,8 +1,22 @@
-class Order {
+import 'package:hive/hive.dart';
+
+part 'order.g.dart';
+
+@HiveType(typeId: 0)
+class Order extends HiveObject {
+  @HiveField(0)
   late String title;
+
+  @HiveField(1)
   late String cover;
+
+  @HiveField(2)
   late String size;
+
+  @HiveField(3)
   late int amount;
+
+  @HiveField(4)
   late int price;
 
   Order({required this.title,required this.cover,required this.size,required this.amount,required this.price});
